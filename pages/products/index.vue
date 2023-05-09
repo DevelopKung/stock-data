@@ -62,7 +62,8 @@
 
     <v-dialog v-model="show_data" persistent width="500" >
       <v-card>
-        <v-card-title class="text-h5 grey lighten-2"> ดูข้อมูล </v-card-title>
+        <v-card-title> ดูข้อมูล </v-card-title>
+        <v-divider></v-divider>
         <v-card-text class="py-4 px-6">
           <div class="d-flex justify-space-between py-1">
             <h3>ใบตรวจนับสินค้า</h3>
@@ -93,6 +94,7 @@
             <h3>{{ info.product_qty_box }} </h3>
           </div>
         </v-card-text>
+        <v-divider></v-divider>
         <v-card-actions class="justify-end">
           <v-btn small depressed @click="show_data = false">ยกเลิก</v-btn>
         </v-card-actions>

@@ -104,12 +104,7 @@ export default {
           } 
         })
         if (auth.data.status == true) {
-          if (auth.data.role && auth.data.role[0] == 'admin') {
-            this.$router.replace("/")
-          } else if (auth.data.role && auth.data.role[0] == 'user') {
-            this.$router.replace("/form-user")
-          }
-          
+          this.$router.replace("/")
         } else {
           await this.$auth.logout()
         }

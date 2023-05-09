@@ -61,8 +61,8 @@ export default {
       valid_register: true,
       requireRules: [v => !!v || 'กรุณากรอกข้อมูล'],
       member: {
-        username: "admin",
-        password: "1234",
+        username: "",
+        password: "",
         role: "admin"
       },
       form_regis: {

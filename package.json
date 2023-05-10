@@ -9,7 +9,6 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "remove": "rm -r dist",
-    "clearPort": "kill -9 $(lsof -ti:3010,8010)",
     "phPages": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "author": "",
@@ -29,6 +28,7 @@
     "socket.io-client": "^4.6.1",
     "videojs-resolution-switcher": "^0.4.2",
     "vue": "^2.6.14",
+    "vue-json-excel": "^0.3.0",
     "vue-numeral-filter": "^2.2.0",
     "vue-qrcode-component": "^2.1.1",
     "vue-server-renderer": "^2.6.14",

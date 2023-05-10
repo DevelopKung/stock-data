@@ -39,7 +39,8 @@ export default {
     { src: '~plugins/load-image.js', mode: 'client' },
     { src: '~plugins/VueNumeral.js', mode: 'client' },
     { src: '~plugins/draggable.js', mode: 'client' },
-    { src: '~plugins/sweetalert.js', mode: 'client' }
+    { src: '~plugins/sweetalert.js', mode: 'client' },
+    { src: '~plugins/json-to-excel.js', mode: 'client' }
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

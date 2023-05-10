@@ -9,7 +9,12 @@
           <v-text-field v-model="filter.search" prepend-inner-icon="mdi-magnify" outlined placeholder="ค้นหา" single-line hide-details clearable dense></v-text-field>
         </v-col>
         <v-spacer></v-spacer>
-
+        <v-col cols="auto">
+          <!-- <v-btn color="success" small depressed @click="exportData">ส่งข้อมูลออก</v-btn> -->
+          <download-excel :data="exportData" name="data-product.xls" :fields="fields">
+            <v-btn color="teal" dark small depressed>ส่งข้อ</v-btn> 
+          </download-excel>
+        </v-col>
         <v-col cols="auto">
           <v-btn color="success" small depressed @click="show_upload = true">อัพโหลด</v-btn>
         </v-col>
@@ -91,7 +96,7 @@
           </div>
           <div class="d-flex justify-space-between py-1">
             <h3>หมายเหตุ</h3>
-            <h3>{{ info.product_qty_box }} </h3>
+            <h3>{{ info.product_remark }} </h3>
           </div>
         </v-card-text>
         <v-divider></v-divider>
@@ -144,7 +149,16 @@ export default {
         id: 2,
         name: 'ที่ยังไม่นับ',
         value: 'not_counted'
-      }]
+      }],
+      fields: {
+        "โค้ด": "code",
+        "ชื่อ": "name",
+        "ไซส์": "size",
+        "แถว": "row",
+        "จำนวนกล่อง": "qty_box",
+        "แผ่น": "unit",
+        "หมายเหตุ": "remark",
+      },
     }
   },
   computed: {
@@ -214,7 +228,20 @@ export default {
       } else if (this.filter.selected == 'not_counted') {
         return this.lists.filter(x => !x.user_id)
       }
-      
+    },
+     
+    exportData(){
+      return this.lists_items.map(x => {
+        return {
+          code: x.product_code,
+          name: x.product_name,
+          size: x.product_size,
+          row: x.product_row,
+          unit: x.product_unit,
+          qty_box: x.product_qty_box,
+          remark: x.product_remark
+        }
+      })
     }
 
   },
@@ -224,6 +251,7 @@ export default {
       delete: 'products/delete',
       importFile: 'products/importFile',
       loadInfo: 'products/loadInfo',
+      exportFile: 'products/exportFile',
     }),
     rowClass(item) {
       return (item.status == ('false' || false)) ? 'error--text' : ''
@@ -298,8 +326,18 @@ export default {
     clearImport(){
       this.file_excel = null
     },
-    refreshData(){
+    async refreshData(){
+      await this.getData()
+    },
+    async exportData(){
+      await this.getData()
 
+      this.lists_items
+      const url = window.URL.createObjectURL(new Blob([res]))
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", nameZip);
+      link.click();
     }
   },
   async fetch() {
